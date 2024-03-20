@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, FlatList, StyleSheet, View } from 'react-native';
+import { Button, FlatList, StatusBar, StyleSheet, View } from 'react-native';
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
@@ -30,22 +30,26 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button title='Add New Goal' color="#5e0acc" onPress={startAddGoalHandler} />
-      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandler} />
-      <View style={styles.goalsContainer}>
-        <FlatList data={courseGoals} renderItem={(itemData) => {
-          return <GoalItem 
-                  id={itemData.item.id} 
-                  text={itemData.item.text} 
-                  onDeleteItem={deleteGoalHandler} />;
-        }} 
-        keyExtractor={(item, index)=> { // se o atributo já não tiver o nome key, se tiver ele consegue inferir automaticamente
-          return item.id;
-        }}
-        />
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button title='Add New Goal' color="#a065ec" onPress={startAddGoalHandler} />
+        <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandler} />
+        <View style={styles.goalsContainer}>
+          <FlatList data={courseGoals} renderItem={(itemData) => {
+            return <GoalItem 
+                    id={itemData.item.id} 
+                    text={itemData.item.text} 
+                    onDeleteItem={deleteGoalHandler} />;
+          }} 
+          keyExtractor={(item, index)=> { // se o atributo já não tiver o nome key, se tiver ele consegue inferir automaticamente
+            return item.id;
+          }}
+          />
+        </View>
       </View>
-    </View>
+    </>
+
   );
 }
 
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
     paddingTop: 50,
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   
   goalsContainer: {
