@@ -17,8 +17,8 @@ function SignupScreen() {
       authCtx.authenticate(token);
     } catch (error) {
       Alert.alert("SignUp failed", "Could not create user. Please try again.");
+      setIsAuthenticating(false);
     }
-    setIsAuthenticating(false);
   }
 
   if (isAuthenticating) {
